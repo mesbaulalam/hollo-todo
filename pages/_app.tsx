@@ -7,8 +7,9 @@ import { Todo, AppContextInterface } from "../interfaces";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [todo, setTodo] = React.useState<Todo[]>([
-    { text: "LOL", complete: false },
+    { text: "LOL", complete: false, id: 1 },
   ]);
+  const [id, incrementId] = React.useState<number>(1);
 
   const addTodo = (data: Todo) => setTodo([...todo, data]);
 
