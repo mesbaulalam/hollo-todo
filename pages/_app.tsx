@@ -7,7 +7,7 @@ import { Todo, AppContextInterface } from "../interfaces";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [todo, setTodo] = React.useState<Todo[]>([
-    { text: "LOL", complete: false, id: 1 },
+    { text: "LOL", complete: false, id: 0 },
   ]);
   const [id, incrementId] = React.useState<number>(1);
 
@@ -15,13 +15,19 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const removeTodo = (index: number) => {
     let ini = [...todo];
-    ini.splice(index, 1);
+    ini = ini.filter((data) => data.id !== index);
     setTodo(ini);
   };
 
   const changeStatus = (index: number) => {
     let ini = [...todo];
-    ini[index].complete = !ini[index].complete;
+    ini.some((data, idx) => {
+      if (data.id === index) {
+        ini[idx].complete = !ini[idx].complete;
+        return true;
+      }
+      return false;
+    });
     setTodo(ini);
   };
 
@@ -30,6 +36,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     addTodo,
     removeTodo,
     changeStatus,
+    id,
+    incrementId,
   };
   return (
     <TodoContext.Provider value={provider}>

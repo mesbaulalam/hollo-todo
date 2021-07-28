@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface Todo {
   text: string;
   complete: boolean;
@@ -9,4 +11,6 @@ export interface AppContextInterface {
   addTodo: (data: Todo) => void;
   removeTodo: (index: number) => void;
   changeStatus: (index: number) => void;
+  id: number;
+  incrementId: React.Dispatch<React.SetStateAction<number>>;
 }

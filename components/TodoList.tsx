@@ -1,49 +1,84 @@
 import React, { useContext, useState } from "react";
 import { TodoContext } from "../Context";
-import { AppContextInterface } from "../interfaces";
+import { AppContextInterface, Todo } from "../interfaces";
 import { default as cross } from "../public/Cross.svg";
 import Image from "next/image";
 
 const TodoList: React.FC = () => {
   const content = useContext<AppContextInterface | null>(TodoContext);
+  const [finalList, setFinalList] = React.useState<Todo[] | undefined>([]);
   const [nav, setNav] = useState<string>("All");
-  console.log(content?.todo);
+
+  React.useEffect(() => {
+    switch (nav) {
+      case "All":
+        setFinalList(content?.todo);
+        break;
+      case "Active":
+        setFinalList(content?.todo.filter((data) => data.complete === false));
+        break;
+      case "Completed":
+        setFinalList(content?.todo.filter((data) => data.complete === true));
+        break;
+      default:
+        break;
+    }
+  }, [nav, content?.todo]);
+
+  const itemsLeft = (): number => {
+    let count = 0;
+    content?.todo.forEach((data) => {
+      if (data.complete === false) {
+        count += 1;
+      }
+    });
+    return count;
+  };
+
+  const clearAll = () => {
+    content?.todo.forEach((data) => {
+      if (data.complete === true) {
+        content.removeTodo(data.id);
+      }
+    });
+  };
 
   return (
     <div className="mt-7">
-      {content?.todo.map((res, idx) => (
-        <div
-          className={
-            "shadow appearance-none border  py-2 px-3 text-grey-darker mx-auto block w-1/2 bg-gray-200 flex items-center justify-between w-3/4 sm:w-1/2" +
-            (idx === 0 ? " rounded-t-md" : "")
-          }
-          key={idx}
-        >
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              checked={res.complete === true ? true : false}
-              className="form-checkbox rounded-full p-4 text-green-500 border-2 mr-3 border-gray-300"
-              onChange={() => content.changeStatus(idx)}
-            />
-            <p
-              className={
-                res.complete === true ? "line-through text-gray-400" : ""
-              }
-            >
-              {res.text}
-            </p>
-          </div>
+      {finalList !== undefined &&
+        finalList.map((res, idx) => (
           <div
-            className="cursor-pointer"
-            onClick={() => content.removeTodo(idx)}
+            className={
+              "shadow appearance-none border  py-2 px-3 text-grey-darker mx-auto block w-1/2 bg-gray-200 flex items-center justify-between w-3/4 sm:w-1/2" +
+              (idx === 0 ? " rounded-t-md" : "")
+            }
+            key={idx}
           >
-            <Image src={cross} />
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                checked={res.complete === true ? true : false}
+                className="form-checkbox rounded-full p-4 text-green-500 border-2 mr-3 border-gray-300"
+                onChange={() => content?.changeStatus(res.id)}
+              />
+              <p
+                className={
+                  res.complete === true ? "line-through text-gray-400" : ""
+                }
+              >
+                {res.text}
+              </p>
+            </div>
+            <div
+              className="cursor-pointer"
+              onClick={() => content?.removeTodo(res.id)}
+            >
+              <Image src={cross} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
       <div className="shadow appearance-none text-gray-500 border py-2 px-3 mx-auto block w-1/2 bg-gray-200 flex items-center justify-between rounded-b-md mb-8 w-3/4 sm:w-1/2">
-        <div className="text-gray-400">3 items left</div>
+        <div className="text-gray-400">{`${itemsLeft()} item(s) left`}</div>
         <div
           className={`${
             nav === "All" ? "text-green-500" : ""
@@ -68,7 +103,9 @@ const TodoList: React.FC = () => {
         >
           Completed
         </div>
-        <div>Clear completed</div>
+        <div onClick={clearAll} className="cursor-pointer">
+          Clear completed
+        </div>
       </div>
       <div className="shadow appearance-none text-gray-500 border py-2 px-3 mx-auto block w-1/2 bg-gray-200 flex items-center justify-between rounded-md lg:hidden w-3/4 sm:w-1/2">
         <div
