@@ -5,23 +5,31 @@ import { default as cross } from "../public/Cross.svg";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
   return (
     <div className="bg-gray-50 h-2/5 relative overflow-hidden">
       <div className="flex justify-center pt-8 items-center text-gray-500">
-        <div className="mr-12 hidden sm:block">About Us</div>
-        <div className="hidden sm:block">Contact Us</div>
+        <Link href="/About">
+          <div className="mr-12 hidden sm:block cursor-pointer">About Us</div>
+        </Link>
+        <Link href="/About">
+          <div className="hidden sm:block cursor-pointer">Contact Us</div>
+        </Link>
         <div
           className="absolute right-16 py-2 px-4 cursor-pointer z-20 block sm:hidden"
           onClick={() => setOpenMenu(!openMenu)}
         >
           <Image alt="path" src={menu} />
         </div>
-        <div className="absolute right-16 py-2 px-4 bg-green-400 text-white z-20 rounded-md hidden sm:block">
-          Sign Up!
-        </div>
+        <Link href="/About">
+          <div className="absolute right-16 py-2 px-4 bg-green-400 text-white z-20 rounded-md hidden sm:block cursor-pointer">
+            Sign Up!
+          </div>
+        </Link>
+
         <div className="absolute right-0 top-0 lg:w-96 md:w-64 sm:w-48 w-24 h-96">
           <Image alt="path" src="/Path.png" layout="fill" />
         </div>
@@ -51,13 +59,21 @@ const Header: React.FC = () => {
             >
               <Image src={cross} />
             </div>
-            <div className="text-gray-500 p-8 pb-4 mt-8 cursor-pointer">
-              About us
-            </div>
-            <div className="pl-8 text-gray-500 cursor-pointer">Contact us</div>
-            <div className="bg-green-400 text-center w-full absolute bottom-0 rounded-b-lg py-2 cursor-pointer">
-              Sign up
-            </div>
+            <Link href="/About">
+              <div className="text-gray-500 p-8 pb-4 mt-8 cursor-pointer">
+                About us
+              </div>
+            </Link>
+            <Link href="/About">
+              <div className="pl-8 text-gray-500 cursor-pointer">
+                Contact us
+              </div>
+            </Link>
+            <Link href="/About">
+              <div className="bg-green-400 text-center w-full absolute bottom-0 rounded-b-lg py-2 cursor-pointer">
+                Sign up
+              </div>
+            </Link>
           </div>
         </Fade>
       </Modal>

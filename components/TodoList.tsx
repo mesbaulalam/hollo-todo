@@ -65,12 +65,12 @@ const TodoList: React.FC = () => {
         finalList.map((res, idx) => (
           <div
             className={
-              "shadow appearance-none border-b border-gray-200 py-2 px-3 text-grey-darker mx-auto block w-1/2 bg-white flex items-center justify-between w-3/4 sm:w-1/2" +
+              "shadow appearance-none  border-b border-gray-200 py-2 px-3 text-grey-darker mx-auto block w-1/2 bg-white flex items-center justify-between w-3/4 sm:w-1/2" +
               (idx === 0 ? " rounded-t-md" : "")
             }
             key={idx}
           >
-            <div className="flex items-center">
+            <div className="flex items-center break-all">
               <input
                 type="checkbox"
                 checked={res.complete === true ? true : false}
@@ -85,7 +85,10 @@ const TodoList: React.FC = () => {
                 {res.text}
               </p>
             </div>
-            <div className="cursor-pointer" onClick={() => removeTodo(res.id)}>
+            <div
+              className="cursor-pointer ml-5"
+              onClick={() => removeTodo(res.id)}
+            >
               <Image src={cross} />
             </div>
           </div>

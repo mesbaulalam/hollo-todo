@@ -7,6 +7,9 @@ const AddTodo: React.FC = () => {
   const [text, setText] = useState<string>("");
 
   const addTask = (): void => {
+    if (text.trim() === "") {
+      return;
+    }
     content?.setTodo([
       ...content.todo,
       { complete: false, text: text, id: content.id },

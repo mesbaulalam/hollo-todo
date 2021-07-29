@@ -1,34 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![NextJS](https://img.shields.io/badge/NextJS-11.0.1-fcba03)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-2.2.7-green)
+![React](https://img.shields.io/badge/React-17.0.2-blueviolet)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.3.5-red)
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The project has been implemented with TypeScript and styled with TailwindCSS.
 
 ## Getting Started
 
-First, run the development server:
+To get started, just clone the repository and run `yarn install && yarn dev`:
 
 ```bash
-npm run dev
-# or
+git clone https://github.com/mesbaulalam/hollo-todo.git
+yarn install
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Comments/External libraries used
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.tsx`.
+- Use of Material-UI (^4.12.2) to trigger and design modal for mobile screen.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- React Context API for global state management. For a single-page and simple application like a Todo list, I felt Redux overcomplicates things, and chose to use the Context API. I never worked with Context API, so I also wanted to use it in a project
 
-## Learn More
+- TailwindCSS has some limitations when styling form states, hence I used @tailwindcss/custom-forms (^0.2.1)
 
-To learn more about Next.js, take a look at the following resources:
+- Avoided using type "any" since it is highly discouraged in TypeScript
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- No unit tests have been performed in this project.
