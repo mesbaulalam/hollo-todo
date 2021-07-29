@@ -49,7 +49,7 @@ const TodoList: React.FC = () => {
         finalList.map((res, idx) => (
           <div
             className={
-              "shadow appearance-none border  py-2 px-3 text-grey-darker mx-auto block w-1/2 bg-gray-200 flex items-center justify-between w-3/4 sm:w-1/2" +
+              "shadow appearance-none border-b border-gray-200 py-2 px-3 text-grey-darker mx-auto block w-1/2 bg-white flex items-center justify-between w-3/4 sm:w-1/2" +
               (idx === 0 ? " rounded-t-md" : "")
             }
             key={idx}
@@ -77,7 +77,7 @@ const TodoList: React.FC = () => {
             </div>
           </div>
         ))}
-      <div className="shadow appearance-none text-gray-500 border py-2 px-3 mx-auto block w-1/2 bg-gray-200 flex items-center justify-between rounded-b-md mb-8 w-3/4 sm:w-1/2">
+      <div className="shadow appearance-none text-gray-500 border py-3 px-3 mx-auto block w-1/2 bg-white flex items-center justify-between rounded-b-md mb-8 w-3/4 sm:w-1/2">
         <div className="text-gray-400">{`${itemsLeft()} item(s) left`}</div>
         <div
           className={`${
