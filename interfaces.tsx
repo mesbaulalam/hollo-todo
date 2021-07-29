@@ -8,9 +8,7 @@ export interface Todo {
 
 export interface AppContextInterface {
   todo: Todo[];
-  addTodo: (data: Todo) => void;
-  removeTodo: (index: number) => void;
-  changeStatus: (index: number) => void;
+  setTodo: React.Dispatch<React.SetStateAction<Todo[]>>;
   id: number;
   incrementId: React.Dispatch<React.SetStateAction<number>>;
 }

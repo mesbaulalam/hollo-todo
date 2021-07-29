@@ -11,31 +11,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   ]);
   const [id, incrementId] = React.useState<number>(1);
 
-  const addTodo = (data: Todo) => setTodo([...todo, data]);
-
-  const removeTodo = (index: number) => {
-    let ini = [...todo];
-    ini = ini.filter((data) => data.id !== index);
-    setTodo(ini);
-  };
-
-  const changeStatus = (index: number) => {
-    let ini = [...todo];
-    ini.some((data, idx) => {
-      if (data.id === index) {
-        ini[idx].complete = !ini[idx].complete;
-        return true;
-      }
-      return false;
-    });
-    setTodo(ini);
-  };
-
   const provider: AppContextInterface = {
     todo,
-    addTodo,
-    removeTodo,
-    changeStatus,
+    setTodo,
     id,
     incrementId,
   };

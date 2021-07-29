@@ -7,7 +7,10 @@ const AddTodo: React.FC = () => {
   const [text, setText] = useState<string>("");
 
   const addTask = (): void => {
-    content?.addTodo({ complete: false, text: text, id: content.id });
+    content?.setTodo([
+      ...content.todo,
+      { complete: false, text: text, id: content.id },
+    ]);
     content?.incrementId(content.id + 1);
     setText("");
   };

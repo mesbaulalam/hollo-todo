@@ -36,11 +36,27 @@ const TodoList: React.FC = () => {
   };
 
   const clearAll = () => {
-    content?.todo.forEach((data) => {
-      if (data.complete === true) {
-        content.removeTodo(data.id);
+    let cloneData = content?.todo.slice(0);
+    cloneData = cloneData?.filter((data) => data.complete === false);
+    content?.setTodo(cloneData!);
+  };
+
+  const changeStatus = (id: number) => {
+    let ini = content?.todo.slice(0);
+    ini = ini?.map((data) => {
+      if (data.id === id) {
+        return { ...data, complete: !data.complete };
+      } else {
+        return data;
       }
     });
+    content?.setTodo(ini!);
+  };
+
+  const removeTodo = (index: number) => {
+    let ini = content?.todo.slice(0);
+    ini = ini?.filter((data) => data.id !== index);
+    content?.setTodo(ini!);
   };
 
   return (
@@ -59,7 +75,7 @@ const TodoList: React.FC = () => {
                 type="checkbox"
                 checked={res.complete === true ? true : false}
                 className="form-checkbox rounded-full p-4 text-green-500 border-2 mr-3 border-gray-300"
-                onChange={() => content?.changeStatus(res.id)}
+                onChange={() => changeStatus(res.id)}
               />
               <p
                 className={
@@ -69,10 +85,7 @@ const TodoList: React.FC = () => {
                 {res.text}
               </p>
             </div>
-            <div
-              className="cursor-pointer"
-              onClick={() => content?.removeTodo(res.id)}
-            >
+            <div className="cursor-pointer" onClick={() => removeTodo(res.id)}>
               <Image src={cross} />
             </div>
           </div>
