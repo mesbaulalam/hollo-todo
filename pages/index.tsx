@@ -3,6 +3,7 @@ import AddTodo from "../components/AddTodo";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import TodoList from "../components/TodoList";
+import GithubCorner from "react-github-corner";
 
 const home: React.FC = () => {
   return (
@@ -11,6 +12,12 @@ const home: React.FC = () => {
       <AddTodo />
       <TodoList />
       <Footer />
+      <GithubCorner
+        href="https://github.com/mesbaulalam/hollo-todo"
+        direction="left"
+        target="_blank"
+        size="100"
+      />
     </div>
   );
 };
