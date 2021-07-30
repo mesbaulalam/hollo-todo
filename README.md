@@ -1,9 +1,10 @@
 ![NextJS](https://img.shields.io/badge/NextJS-11.0.1-fcba03)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-2.2.7-green)
 ![React](https://img.shields.io/badge/React-17.0.2-blueviolet)
-![TypeScript](https://img.shields.io/badge/TypeScript-4.3.5-red)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.3.5-blue)
+![Firebase](https://img.shields.io/badge/Firebase-8.8.1-red)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The project has been implemented with TypeScript and styled with TailwindCSS.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The project has been implemented with TypeScript and styled with TailwindCSS. It uses Firebase and Firestore database to store and update the Todo List.
 
 ## Getting Started
 

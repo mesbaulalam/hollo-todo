@@ -1,25 +1,25 @@
 import React, { useState, useContext } from "react";
-import { TodoContext } from "../Context";
-import { AppContextInterface } from "../interfaces";
+import { db } from "../firebase";
+import firebase from "firebase";
 
 const AddTodo: React.FC = () => {
-  const content = useContext<AppContextInterface | null>(TodoContext);
   const [text, setText] = useState<string>("");
 
-  const addTask = (): void => {
+  const addTask = (event: React.SyntheticEvent): void => {
+    event.preventDefault();
     if (text.trim() === "") {
       return;
     }
-    content?.setTodo([
-      ...content.todo,
-      { complete: false, text: text, id: content.id },
-    ]);
-    content?.incrementId(content.id + 1);
+    db.collection("todos").add({
+      text: text,
+      completed: false,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     setText("");
   };
 
   return (
-    <div>
+    <form>
       <input
         className="shadow appearance-none border rounded py-2 px-3 text-grey-darker mx-auto block w-3/4 sm:w-1/2 left-0 right-0 h-14 -mt-8 absolute rounded-md"
         placeholder="Add Todo"
@@ -27,12 +27,13 @@ const AddTodo: React.FC = () => {
         onChange={(event) => setText(event.target.value)}
       />
       <div className="flex pt-10 justify-center">
-        <div
+        <button
           className="py-2 px-4 bg-green-400 text-white rounded-md mr-5 cursor-pointer"
           onClick={addTask}
+          type="submit"
         >
           Add Todo!
-        </div>
+        </button>
         <div
           className="py-2 px-4 bg-green-400 text-white rounded-md cursor-pointer"
           onClick={() => setText("")}
@@ -40,7 +41,7 @@ const AddTodo: React.FC = () => {
           Clear Text
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

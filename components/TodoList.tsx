@@ -1,34 +1,35 @@
 import React, { useContext, useState } from "react";
 import { TodoContext } from "../Context";
-import { AppContextInterface, Todo } from "../interfaces";
+import { Todo } from "../interfaces";
 import { default as cross } from "../public/Cross.svg";
 import Image from "next/image";
+import { db } from "../firebase";
 
 const TodoList: React.FC = () => {
-  const content = useContext<AppContextInterface | null>(TodoContext);
+  const content = useContext<Todo[] | null>(TodoContext);
   const [finalList, setFinalList] = React.useState<Todo[] | undefined>([]);
   const [nav, setNav] = useState<string>("All");
 
   React.useEffect(() => {
     switch (nav) {
       case "All":
-        setFinalList(content?.todo);
+        setFinalList(content!);
         break;
       case "Active":
-        setFinalList(content?.todo.filter((data) => data.complete === false));
+        setFinalList(content?.filter((data) => data.completed === false));
         break;
       case "Completed":
-        setFinalList(content?.todo.filter((data) => data.complete === true));
+        setFinalList(content?.filter((data) => data.completed === true));
         break;
       default:
         break;
     }
-  }, [nav, content?.todo]);
+  }, [nav, content]);
 
   const itemsLeft = (): number => {
     let count = 0;
-    content?.todo.forEach((data) => {
-      if (data.complete === false) {
+    content?.forEach((data) => {
+      if (data.completed === false) {
         count += 1;
       }
     });
@@ -36,27 +37,25 @@ const TodoList: React.FC = () => {
   };
 
   const clearAll = () => {
-    let cloneData = content?.todo.slice(0);
-    cloneData = cloneData?.filter((data) => data.complete === false);
-    content?.setTodo(cloneData!);
+    let query = db.collection("todos").where("completed", "==", true);
+    query.get().then((querySnapshot) =>
+      querySnapshot.forEach((doc) => {
+        doc.ref.delete();
+      })
+    );
   };
 
-  const changeStatus = (id: number) => {
-    let ini = content?.todo.slice(0);
-    ini = ini?.map((data) => {
-      if (data.id === id) {
-        return { ...data, complete: !data.complete };
-      } else {
-        return data;
-      }
-    });
-    content?.setTodo(ini!);
+  const changeStatus = (id: string, bool: boolean) => {
+    db.collection("todos").doc(id).set(
+      {
+        completed: !bool,
+      },
+      { merge: true }
+    );
   };
 
-  const removeTodo = (index: number) => {
-    let ini = content?.todo.slice(0);
-    ini = ini?.filter((data) => data.id !== index);
-    content?.setTodo(ini!);
+  const removeTodo = (id: string) => {
+    db.collection("todos").doc(id).delete();
   };
 
   return (
@@ -73,13 +72,13 @@ const TodoList: React.FC = () => {
             <div className="flex items-center break-all">
               <input
                 type="checkbox"
-                checked={res.complete === true ? true : false}
+                checked={res.completed === true ? true : false}
                 className="form-checkbox rounded-full p-4 text-green-500 border-2 mr-3 border-gray-300"
-                onChange={() => changeStatus(res.id)}
+                onChange={() => changeStatus(res.id, res.completed)}
               />
               <p
                 className={
-                  res.complete === true ? "line-through text-gray-400" : ""
+                  res.completed === true ? "line-through text-gray-400" : ""
                 }
               >
                 {res.text}

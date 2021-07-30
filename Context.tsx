@@ -1,4 +1,4 @@
 import { createContext } from "react";
-import { AppContextInterface, Todo } from "./interfaces";
+import { Todo } from "./interfaces";
 
-export const TodoContext = createContext<AppContextInterface | null>(null);
+export const TodoContext = createContext<Todo[] | null>(null);
