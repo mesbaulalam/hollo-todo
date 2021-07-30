@@ -7,7 +7,7 @@ import { Todo, AppContextInterface } from "../interfaces";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [todo, setTodo] = React.useState<Todo[]>([
-    { text: "LOL", complete: false, id: 0 },
+    { text: "Be impressed by this todo app", complete: false, id: 0 },
   ]);
   const [id, incrementId] = React.useState<number>(1);
 
