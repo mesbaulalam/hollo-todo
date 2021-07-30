@@ -4,6 +4,8 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-4.3.5-blue)
 ![Firebase](https://img.shields.io/badge/Firebase-8.8.1-red)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/398fb5d4-4c75-4d6c-8428-11fa0f6fee39/deploy-status)](https://todo-list-mesbaul.netlify.app/)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The project has been implemented with TypeScript and styled with TailwindCSS. It uses Firebase and Firestore database to store and update the Todo List.
 
 ## Getting Started
