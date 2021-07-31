@@ -9,7 +9,7 @@ import { TodoContext } from "../Context";
 import { db } from "../firebase";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const home: React.FC = () => {
+const Home: React.FC = () => {
   const [todo, setTodo] = React.useState<Todo[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -54,4 +54,4 @@ const home: React.FC = () => {
   );
 };
 
-export default home;
+export default Home;
