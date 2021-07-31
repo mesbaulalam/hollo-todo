@@ -92,7 +92,7 @@ const TodoList: React.FC = () => {
             </div>
           </div>
         ))}
-      <div className="shadow appearance-none text-gray-500 border py-3 px-3 mx-auto block w-1/2 bg-white flex items-center justify-between rounded-b-md mb-8 w-3/4 sm:w-1/2">
+      <div className="shadow appearance-none text-gray-500 border py-3 px-3 mx-auto block w-1/2 bg-white flex items-center justify-between rounded-b-md w-3/4 sm:w-1/2">
         <div className="text-gray-400">{`${itemsLeft()} item(s) left`}</div>
         <div
           className={`${
